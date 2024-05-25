@@ -1,16 +1,13 @@
 setInputArrtibutes()
-// setOutputArrtibutes()
 update()
 
  setInterval(() => {
     setInputArrtibutes()
-    // setOutputArrtibutes()
     update()
   }, 2000)
 
 function setInputArrtibutes() {
     const collection = document.getElementsByClassName("font-green")
-
 
     for (let i = 0; i < collection.length; i++) {
         setOutputArrtibute(collection[i].parentElement.parentElement)
@@ -21,7 +18,6 @@ function setInputArrtibutes() {
 }
 
 function setOutputArrtibute(parentColumn) {
-    // console.log(parentColumn)
     if(parentColumn.getElementsByClassName("timeDecimal").length > 0) return
     // Create td
     const newColum = document.createElement("td")
