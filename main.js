@@ -2,8 +2,11 @@ setInputArrtibutes()
 update()
 
  setInterval(() => {
-    setInputArrtibutes()
-    update()
+    if(getActiveTab() === "time_tracking") {
+        setInputArrtibutes()
+        update()
+        getActiveTab()
+    }
   }, 2000)
 
 function setInputArrtibutes() {
@@ -49,3 +52,9 @@ function convertToTime(value) {
     return arr[0] + ":" + minutesString
 }
 
+function getActiveTab() {
+    const collection = document.getElementsByClassName("x-tab-active")
+    if(collection.length === 0) return ""
+    else if(collection[0].getElementsByClassName("time_tracking").length === 1)
+        return "time_tracking"
+}
