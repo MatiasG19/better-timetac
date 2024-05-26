@@ -3,7 +3,7 @@
   "name": "Better Timetac",
   "version": "1.0",
 
-  "description": "Adds a red border to all webpages matching mozilla.org.",
+  "description": "Show times in actual time formats.",
 
   "icons": {
     "48": "public/border-48.png"
