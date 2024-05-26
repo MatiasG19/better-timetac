@@ -18,7 +18,7 @@ function setInputArrtibutes() {
 }
 
 function setOutputArrtibute(parentColumn) {
-    if(parentColumn.getElementsByClassName("timeDecimal").length > 0) return
+    if(parentColumn.getElementsByClassName(`timeDecimal`).length > 0) return
     // Create td
     const newColum = document.createElement("td")
     newColum.setAttribute("class", "x-grid-cell x-grid-td x-grid-cell-gridcolumn-1167 column-c_33 x-unselectable")
@@ -29,17 +29,15 @@ function setOutputArrtibute(parentColumn) {
     newColum.appendChild(newDiv)
     // Create span
     const newSpan = document.createElement("span")
-    newSpan.setAttribute("class", "font-green timeDecimal")
+    newSpan.setAttribute("class", "timeDecimal")
     newDiv.appendChild(newSpan)
 }
 
 function update() {
     const collection = document.getElementsByClassName("timeString")
     const outPutcollection = document.getElementsByClassName("timeDecimal")
-
     for (let i = 0; i < collection.length; i++) {
         const time = convertToTime(collection[i].innerHTML)
-        console.log(time)
         outPutcollection[i].innerHTML = time + " hh:mm"
     }
 }
@@ -47,7 +45,7 @@ function update() {
 function convertToTime(value) {
     const arr = value.split(".")
     const minutes = Math.round(parseInt(arr[1].replace("h", "").trim()) * 60 / 100)
-    console.log(minutes)
-    return arr[0] + ":" + minutes
+    const minutesString = minutes.toString().length === 1 ? "0" + minutes.toString() : minutes.toString()
+    return arr[0] + ":" + minutesString
 }
 
