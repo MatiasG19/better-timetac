@@ -1,14 +1,13 @@
-if (getActiveTab() === 'time_tracking') {
-  setInputArrtibutes()
-  update()
-}
+update()
 
-setInterval(() => {
+setInterval(update, 2000)
+
+function update() {
   if (getActiveTab() === 'time_tracking') {
     setInputArrtibutes()
-    update()
+    insertTime()
   }
-}, 2000)
+}
 
 function setInputArrtibutes() {
   const collection = document.getElementsByClassName('font-green')
@@ -44,7 +43,7 @@ function setOutputArrtibute(parentColumn: HTMLElement) {
   newDiv.appendChild(newSpan)
 }
 
-function update() {
+function insertTime() {
   const collection = document.getElementsByClassName('timeString')
   const outPutcollection = document.getElementsByClassName('timeDecimal')
   for (let i = 0; i < collection.length; i++) {
