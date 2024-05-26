@@ -10,17 +10,18 @@ function update() {
 }
 
 function setInputArrtibutes() {
-  const collection = document.getElementsByClassName('font-green')
+  const collection = document.getElementsByClassName(
+    'x-grid-cell-gridcolumn-1167 x-grid-td'
+  )
 
   for (let i = 0; i < collection.length; i++) {
-    if (
-      collection[i].parentElement &&
-      collection[i].parentElement!.parentElement
-    )
-      setOutputArrtibute(collection[i].parentElement!.parentElement!)
+    setOutputArrtibute(collection[i] as HTMLElement)
 
-    if (!collection[i].hasAttribute('timeString'))
-      collection[i].classList.add('timeString')
+    const span = collection[i].firstElementChild?.firstElementChild
+
+    if (span && !span.classList.contains('timeString')) {
+      span.classList.add('timeString')
+    }
   }
 }
 
@@ -30,7 +31,7 @@ function setOutputArrtibute(parentColumn: HTMLElement) {
   const newColum = document.createElement('td')
   newColum.setAttribute(
     'class',
-    'x-grid-cell x-grid-td x-grid-cell-gridcolumn-1167 column-c_33 x-unselectable'
+    'x-grid-cell x-grid-td column-c_33 x-unselectable'
   )
   parentColumn.appendChild(newColum)
   // Create div
@@ -46,6 +47,7 @@ function setOutputArrtibute(parentColumn: HTMLElement) {
 function insertTime() {
   const collection = document.getElementsByClassName('timeString')
   const outPutcollection = document.getElementsByClassName('timeDecimal')
+
   for (let i = 0; i < collection.length; i++) {
     const time = convertToTime(collection[i].innerHTML)
     outPutcollection[i].innerHTML = time + ' hh:mm'
@@ -53,6 +55,8 @@ function insertTime() {
 }
 
 function convertToTime(value: string) {
+  if (!value.match(/\d+\.\d{2}\sh/gm)) return value
+
   const arr = value.split('.')
   const minutes = Math.round(
     (parseInt(arr[1].replace('h', '').trim()) * 60) / 100
